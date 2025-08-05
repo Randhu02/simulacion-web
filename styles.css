@@ -135,12 +135,12 @@ button:hover,
 /* 🔄 RESPONSIVE PARA CELULAR */
 @media (max-width: 600px) {
   body {
-    padding: 90px 10px 30px 10px;
-    overflow-x: hidden;
+    padding: 10px 10px 30px 10px;
   }
 
   header h1 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
+    line-height: 1.2;
     padding: 0 10px;
   }
 
@@ -148,27 +148,34 @@ button:hover,
     flex-direction: column;
     gap: 10px;
     align-items: stretch;
-    text-align: left;
+    padding: 10px;
   }
 
   label {
-    font-size: 1rem;
-    margin-bottom: 4px;
+    font-size: 0.95rem;
   }
 
   select {
-    min-width: unset;
+    min-width: 100%;
+    font-size: 0.95rem;
+    padding: 8px 10px;
+  }
+
+  #subtipo-container {
+    flex-direction: column;
+    align-items: stretch;
     width: 100%;
   }
 
   #contenedor-imagenes {
     grid-template-columns: 1fr;
-    padding: 0;
+    gap: 15px;
   }
 
   #contenedor-imagenes img {
-    max-width: 90vw;
+    max-width: 90%;
   }
 }
+
 
 
