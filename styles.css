@@ -6,28 +6,21 @@ body {
   padding: 0 20px 40px 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #fff;
+  padding-top: 80px; /* para no tapar el contenido con el header */
 }
 
-/* 2. Bloque título centrado con fondo verde petróleo */
+/* 2. Header fijo con título centrado */
 header {
-  background-color: #004d40;  /* verde petróleo */
+  background-color: #004d40;
   padding: 20px 0;
   text-align: center;
-  position: fixed;       /* fijo arriba */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   color: white;
-  font-weight: 700;
-  font-size: 1.8rem;
-  letter-spacing: 1px;
-}
-
-/* Para que el resto del contenido no quede debajo del header */
-body {
-  padding-top: 80px; /* ajusta según el alto del header */
 }
 
 header h1 {
@@ -37,20 +30,21 @@ header h1 {
   letter-spacing: 1.5px;
 }
 
-/* Contenedor para los filtros */
+/* 3. Filtros */
 .filtros {
-  background-color: rgba(0, 77, 64, 0.85); /* verde petróleo semitransparente */
+  background-color: rgba(0, 77, 64, 0.85);
   padding: 15px 20px;
   border-radius: 12px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
   display: flex;
   gap: 15px;
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 30px;
+  margin: 30px auto;
+  max-width: 1200px;
 }
 
-/* Estilos para los labels y selects */
+/* Labels y selects */
 label {
   font-weight: 600;
   font-size: 1.1rem;
@@ -64,27 +58,35 @@ select {
   border-radius: 8px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
   background-color: #00695c;
   color: #fff;
   min-width: 180px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-select:hover, select:focus {
+select:hover,
+select:focus {
   background-color: #004d40;
   box-shadow: 0 0 8px #004d40;
   outline: none;
 }
 
-/* Contenedor imágenes en grid */
+/* Subtipo */
+#subtipo-container {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Contenedor de imágenes */
 #contenedor-imagenes {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 25px;
   justify-items: center;
+  padding: 0 15px;
 }
 
-/* Estilos para las imágenes */
+/* Imagen */
 #contenedor-imagenes img {
   width: 100%;
   max-width: 320px;
@@ -100,7 +102,7 @@ select:hover, select:focus {
   box-shadow: 0 10px 25px rgba(0, 77, 64, 0.9);
 }
 
-/* Mensaje de no imágenes */
+/* Mensaje de error */
 #contenedor-imagenes p {
   grid-column: 1 / -1;
   text-align: center;
@@ -109,8 +111,9 @@ select:hover, select:focus {
   color: #e0e0e0;
 }
 
-/* Botón estilo (si tienes botones, por ejemplo) */
-button, .btn {
+/* Botones */
+button,
+.btn {
   background-color: #00796b;
   border: none;
   padding: 12px 25px;
@@ -122,32 +125,50 @@ button, .btn {
   box-shadow: 0 3px 8px rgba(0, 121, 107, 0.6);
 }
 
-button:hover, .btn:hover {
+button:hover,
+.btn:hover {
   background-color: #004d40;
   transform: scale(1.05);
   box-shadow: 0 6px 18px rgba(0, 77, 64, 0.9);
 }
 
-/* Para que el select "subtipo-container" esté alineado bien */
-#subtipo-container {
-  display: inline-flex;
-  align-items: center;
-}
-
-/* Responsive: ajusta paddings en móvil */
+/* 🔄 RESPONSIVE PARA CELULAR */
 @media (max-width: 600px) {
   body {
-    padding: 10px 10px 30px 10px;
+    padding: 90px 10px 30px 10px;
+    overflow-x: hidden;
   }
+
   header h1 {
-    font-size: 2rem;
+    font-size: 1.6rem;
+    padding: 0 10px;
   }
+
   .filtros {
     flex-direction: column;
     gap: 10px;
+    align-items: stretch;
+    text-align: left;
   }
+
+  label {
+    font-size: 1rem;
+    margin-bottom: 4px;
+  }
+
   select {
-    min-width: 100%;
+    min-width: unset;
+    width: 100%;
+  }
+
+  #contenedor-imagenes {
+    grid-template-columns: 1fr;
+    padding: 0;
+  }
+
+  #contenedor-imagenes img {
+    max-width: 90vw;
   }
 }
+
 
