@@ -1,21 +1,33 @@
 /* 1. Fondo de la página con imagen */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: url('foto.webp') no-repeat center center fixed;
+  background: url('https://rumboeconomico.com/wp-content/uploads/2023/09/Tisur_Rumbo_Economico-1170x658.jpeg') no-repeat center center fixed;
   background-size: cover;
   margin: 0;
   padding: 0 20px 40px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #fff;
 }
 
 /* 2. Bloque título centrado con fondo verde petróleo */
 header {
-  background-color: #004d40; /* verde petróleo */
+  background-color: #004d40;  /* verde petróleo */
   padding: 20px 0;
   text-align: center;
-  border-radius: 0 0 15px 15px;
+  position: fixed;       /* fijo arriba */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
   box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-  margin-bottom: 30px;
+  color: white;
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+}
+
+/* Para que el resto del contenido no quede debajo del header */
+body {
+  padding-top: 80px; /* ajusta según el alto del header */
 }
 
 header h1 {
