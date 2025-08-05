@@ -1,15 +1,141 @@
+/* 1. Fondo de la página con imagen */
 body {
-  font-family: Arial, sans-serif;
-  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: url('foto.webp') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0 20px 40px 20px;
+  color: #fff;
+}
+
+/* 2. Bloque título centrado con fondo verde petróleo */
+header {
+  background-color: #004d40; /* verde petróleo */
+  padding: 20px 0;
+  text-align: center;
+  border-radius: 0 0 15px 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  margin-bottom: 30px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+/* Contenedor para los filtros */
+.filtros {
+  background-color: rgba(0, 77, 64, 0.85); /* verde petróleo semitransparente */
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+/* Estilos para los labels y selects */
+label {
+  font-weight: 600;
+  font-size: 1.1rem;
+  align-self: center;
+  margin-right: 8px;
 }
 
 select {
-  margin: 10px;
-  padding: 5px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #00695c;
+  color: #fff;
+  min-width: 180px;
 }
 
-#contenedor-imagenes img {
-  width: 400px;
-  margin: 10px;
-  border: 1px solid #ccc;
+select:hover, select:focus {
+  background-color: #004d40;
+  box-shadow: 0 0 8px #004d40;
+  outline: none;
 }
+
+/* Contenedor imágenes en grid */
+#contenedor-imagenes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  justify-items: center;
+}
+
+/* Estilos para las imágenes */
+#contenedor-imagenes img {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 12px;
+  border: 3px solid #004d40;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+#contenedor-imagenes img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 25px rgba(0, 77, 64, 0.9);
+}
+
+/* Mensaje de no imágenes */
+#contenedor-imagenes p {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #e0e0e0;
+}
+
+/* Botón estilo (si tienes botones, por ejemplo) */
+button, .btn {
+  background-color: #00796b;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0, 121, 107, 0.6);
+}
+
+button:hover, .btn:hover {
+  background-color: #004d40;
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(0, 77, 64, 0.9);
+}
+
+/* Para que el select "subtipo-container" esté alineado bien */
+#subtipo-container {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Responsive: ajusta paddings en móvil */
+@media (max-width: 600px) {
+  body {
+    padding: 10px 10px 30px 10px;
+  }
+  header h1 {
+    font-size: 2rem;
+  }
+  .filtros {
+    flex-direction: column;
+    gap: 10px;
+  }
+  select {
+    min-width: 100%;
+  }
+}
+
