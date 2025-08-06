@@ -34,10 +34,10 @@ def generar_diccionario_imagenes(base_path):
     return resultado
 
 if __name__ == "__main__":
-    base = "imagenes"  # Ajusta si tu carpeta está en otro lugar
+    base = r"C:\Users\Usuario\Desktop\PROYECTO TISUR\imagenes"  # Ajusta si tu carpeta está en otro lugar
     dicc = generar_diccionario_imagenes(base)
 
-    output_path = os.path.join("simulacion-web", "imagenes.json")
+    output_path = r"C:\Users\Usuario\Desktop\PROYECTO TISUR\simulacion-web\imagenes.json"
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(dicc, f, indent=2, ensure_ascii=False)
 
