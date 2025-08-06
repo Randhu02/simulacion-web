@@ -1,0 +1,205 @@
+{
+  "Producto_Bobinas": {
+    "Desglose": [
+      "MA-8.png",
+      "MT020304.png",
+      "MT21.png",
+      "MT239.png",
+      "MT326263.png",
+      "MT35.png",
+      "MT36.png",
+      "MT37.png",
+      "MT38.png",
+      "MT5152.png",
+      "MT5455.png",
+      "MT61.png",
+      "MTR03.png",
+      "MTR05.png"
+    ],
+    "Grafico_general": [
+      "grafico_general.png"
+    ],
+    "Mapa_calor": [
+      "mapa_calor.png"
+    ],
+    "Prediccion": {
+      "Prediccion_bobinas": [
+        "Área 2 (15x15)_fila_1.png",
+        "Área 2 (15x15)_fila_2.png",
+        "Área 3 (20x15)_fila_1.png",
+        "Área 3 (20x15)_fila_2.png",
+        "Área 3 (20x15)_fila_3.png",
+        "Área 3 (20x15)_fila_4.png",
+        "Área 3 (20x15)_fila_5.png",
+        "Área 3 (20x15)_fila_6.png"
+      ],
+      "Prediccion_cemento": [
+        "Área 2 (15x15)_fila_1.png",
+        "Área 2 (15x15)_fila_2.png",
+        "Área 3 (20x15)_fila_1.png",
+        "Área 3 (20x15)_fila_2.png"
+      ],
+      "Prediccion_rollos": [
+        "Área 3 (20x15)_fila_1.png",
+        "Área 3 (20x15)_fila_2.png",
+        "Área 3 (20x15)_fila_3.png"
+      ],
+      "Prediccion_tubos": []
+    }
+  },
+  "Producto_Cemento": {
+    "Grafico_general": [
+      "grafico_general.png"
+    ],
+    "Mapa_calor": [
+      "mapa_calor.png"
+    ],
+    "Prediccion": {
+      "Prediccion_bobinas": [
+        "Área 3 (20x15)_fila_1.png",
+        "Área 3 (20x15)_fila_2.png",
+        "Área 3 (20x15)_fila_3.png",
+        "Área 3 (20x15)_fila_4.png",
+        "Área 3 (20x15)_fila_5.png",
+        "Área 3 (20x15)_fila_6.png"
+      ],
+      "Prediccion_cemento": [
+        "Área 3 (20x15)_fila_1.png",
+        "Área 3 (20x15)_fila_2.png"
+      ],
+      "Prediccion_rollos": [
+        "Área 3 (20x15)_fila_1.png",
+        "Área 3 (20x15)_fila_2.png",
+        "Área 3 (20x15)_fila_3.png"
+      ],
+      "Prediccion_tubos": [
+        "Área 3 (20x15)_fila_1.png",
+        "Área 3 (20x15)_fila_10.png",
+        "Área 3 (20x15)_fila_11.png",
+        "Área 3 (20x15)_fila_12.png",
+        "Área 3 (20x15)_fila_2.png",
+        "Área 3 (20x15)_fila_3.png",
+        "Área 3 (20x15)_fila_4.png",
+        "Área 3 (20x15)_fila_5.png",
+        "Área 3 (20x15)_fila_6.png",
+        "Área 3 (20x15)_fila_7.png",
+        "Área 3 (20x15)_fila_8.png",
+        "Área 3 (20x15)_fila_9.png"
+      ]
+    }
+  },
+  "Producto_Rollos": {
+    "Desglose": [
+      "imagen_15x15_1x0.png",
+      "imagen_20x15_1x0.png",
+      "imagen_40x15_1x0.png",
+      "imagen_40x15_1x0_fila1.png",
+      "imagen_40x15_1x0_fila2.png"
+    ],
+    "Grafico_general": [
+      "grafico_general.png"
+    ],
+    "Mapa_calor": [
+      "mapa_calor.png"
+    ],
+    "Prediccion": {
+      "Prediccion_bobinas": [
+        "Área 3 (20x15)_fila_1.png",
+        "Área 3 (20x15)_fila_2.png",
+        "Área 3 (20x15)_fila_3.png",
+        "Área 3 (20x15)_fila_4.png",
+        "Área 3 (20x15)_fila_5.png",
+        "Área 3 (20x15)_fila_6.png"
+      ],
+      "Prediccion_cemento": [
+        "Área 3 (20x15)_fila_1.png",
+        "Área 3 (20x15)_fila_2.png"
+      ],
+      "Prediccion_rollos": [
+        "Área 3 (20x15)_fila_1.png",
+        "Área 3 (20x15)_fila_2.png",
+        "Área 3 (20x15)_fila_3.png"
+      ],
+      "Prediccion_tubos": [
+        "Área 3 (20x15)_fila_1.png",
+        "Área 3 (20x15)_fila_10.png",
+        "Área 3 (20x15)_fila_11.png",
+        "Área 3 (20x15)_fila_12.png",
+        "Área 3 (20x15)_fila_2.png",
+        "Área 3 (20x15)_fila_3.png",
+        "Área 3 (20x15)_fila_4.png",
+        "Área 3 (20x15)_fila_5.png",
+        "Área 3 (20x15)_fila_6.png",
+        "Área 3 (20x15)_fila_7.png",
+        "Área 3 (20x15)_fila_8.png",
+        "Área 3 (20x15)_fila_9.png"
+      ]
+    }
+  },
+  "Producto_Tubos": {
+    "Desglose": [
+      "Vista_lateral_MAT13.png",
+      "Vista_lateral_MTR02-1.png",
+      "Vista_lateral_MTR02-2.png",
+      "Vista_lateral_MTR02-3.png",
+      "Vista_lateral_MTR02-4.png",
+      "Vista_lateral_MTR02-5.png",
+      "Vista_lateral_MTR03.png"
+    ],
+    "Grafico_general": [
+      "grafico_general.png"
+    ],
+    "Mapa_calor": [
+      "mapa_calor.png"
+    ],
+    "Prediccion": {
+      "Prediccion_bobinas": [
+        "Área 1 (40x15)_fila_1.png",
+        "Área 1 (40x15)_fila_2.png",
+        "Área 1 (40x15)_fila_3.png",
+        "Área 1 (40x15)_fila_4.png",
+        "Área 1 (40x15)_fila_5.png",
+        "Área 1 (40x15)_fila_6.png",
+        "Área 2 (15x15)_fila_1.png",
+        "Área 2 (15x15)_fila_2.png",
+        "Área 2 (15x15)_fila_3.png",
+        "Área 2 (15x15)_fila_4.png",
+        "Área 2 (15x15)_fila_5.png",
+        "Área 2 (15x15)_fila_6.png",
+        "Área 3 (20x15)_fila_1.png",
+        "Área 3 (20x15)_fila_2.png",
+        "Área 3 (20x15)_fila_3.png"
+      ],
+      "Prediccion_cemento": [
+        "Área 1 (40x15)_fila_1.png",
+        "Área 1 (40x15)_fila_2.png",
+        "Área 2 (15x15)_fila_1.png",
+        "Área 2 (15x15)_fila_2.png",
+        "Área 3 (20x15)_fila_1.png",
+        "Área 3 (20x15)_fila_2.png"
+      ],
+      "Prediccion_rollos": [
+        "Área 1 (40x15)_fila_1.png",
+        "Área 1 (40x15)_fila_2.png",
+        "Área 1 (40x15)_fila_3.png",
+        "Área 2 (15x15)_fila_1.png",
+        "Área 2 (15x15)_fila_2.png",
+        "Área 2 (15x15)_fila_3.png"
+      ],
+      "Prediccion_tubos": [
+        "Área 1 (40x15)_fila_1.png",
+        "Área 1 (40x15)_fila_2.png",
+        "Área 1 (40x15)_fila_3.png",
+        "Área 1 (40x15)_fila_4.png",
+        "Área 2 (15x15)_fila_1.png",
+        "Área 2 (15x15)_fila_2.png",
+        "Área 2 (15x15)_fila_3.png",
+        "Área 2 (15x15)_fila_4.png",
+        "Área 2 (15x15)_fila_5.png",
+        "Área 2 (15x15)_fila_6.png",
+        "Área 2 (15x15)_fila_7.png",
+        "Área 2 (15x15)_fila_8.png"
+      ]
+    }
+  }
+}

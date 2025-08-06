@@ -1,49 +1,20 @@
-const imagenesData = {
-  "Producto_Bobinas": {
-    "Desglose": ["MA-8.png", "MT21.png"],
-    "Grafico_general": ["grafico_general.png"],
-    "Mapa_calor": ["mapa_calor.png"],
-    "Prediccion": {
-      "Prediccion_bobinas": ["Área 2 (15x15)_fila_1.png"],
-      "Prediccion_cemento": ["Área 2 (15x15)_fila_1.png"],
-      "Prediccion_rollos": ["Área 3 (20x15)_fila_1.png"],
-      "Prediccion_tubos": []
-    }
-  },
-  "Producto_Tubos": {
-    "Desglose": ["Vista_lateral_MAT13.png"],
-    "Grafico_general": ["grafico_general.png"],
-    "Mapa_calor": ["mapa_calor.png"],
-    "Prediccion": {
-      "Prediccion_bobinas": ["Área 1 (40x15)_fila_1.png"],
-      "Prediccion_cemento": ["Área 1 (40x15)_fila_1.png"],
-      "Prediccion_rollos": ["Área 1 (40x15)_fila_1.png"],
-      "Prediccion_tubos": ["Área 1 (40x15)_fila_1.png"]
-    }
-  },
-  "Producto_Cemento": {
-    "Desglose": [],
-    "Grafico_general": ["grafico_general.png"],
-    "Mapa_calor": ["mapa_calor.png"],
-    "Prediccion": {
-      "Prediccion_bobinas": ["Área 3 (20x15)_fila_1.png"],
-      "Prediccion_cemento": ["Área 3 (20x15)_fila_1.png"],
-      "Prediccion_rollos": ["Área 3 (20x15)_fila_1.png"],
-      "Prediccion_tubos": ["Área 3 (20x15)_fila_1.png"]
-    }
-  },
-  "Producto_Rollos": {
-    "Desglose": ["imagen_15x15_1x0.png"],
-    "Grafico_general": ["grafico_general.png"],
-    "Mapa_calor": ["mapa_calor.png"],
-    "Prediccion": {
-      "Prediccion_bobinas": ["Área 3 (20x15)_fila_1.png"],
-      "Prediccion_cemento": ["Área 3 (20x15)_fila_1.png"],
-      "Prediccion_rollos": ["Área 3 (20x15)_fila_1.png"],
-      "Prediccion_tubos": ["Área 3 (20x15)_fila_1.png"]
-    }
-  }
-};
+let imagenesData = {};  // Aquí guardaremos la data cargada desde JSON
+
+// Cargar JSON al iniciar la página
+window.addEventListener('DOMContentLoaded', () => {
+  fetch('imagenes.json')
+    .then(response => response.json())
+    .then(data => {
+      imagenesData = data;
+      // Opcional: cargar gráficos si ya hay selección previa
+      mostrarGraficos();
+    })
+    .catch(error => {
+      console.error('Error cargando imagenes.json:', error);
+      const contenedor = document.getElementById("contenedor-imagenes");
+      contenedor.innerHTML = "<p>Error cargando datos de imágenes.</p>";
+    });
+});
 
 function cambiarProducto() {
   document.getElementById("subtipo-container").style.display = "none";
@@ -89,7 +60,6 @@ function mostrarGraficos() {
 
   listaImagenes.forEach(nombreImg => {
     if (!nombreImg) return; // Ignorar cadenas vacías
-    // Nota: encodeURIComponent para espacios y caracteres especiales en URL
     const img = document.createElement("img");
     let ruta = `imagenes/${producto}/${tipo}/`;
     if (tipo === "Prediccion") {
@@ -102,6 +72,7 @@ function mostrarGraficos() {
     contenedor.appendChild(img);
   });
 }
+
 
 
 
