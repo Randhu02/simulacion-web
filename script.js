@@ -30,8 +30,8 @@ function cambiarTipo() {
     subtipoContainer.style.display = "inline";
   } else {
     subtipoContainer.style.display = "none";
-    mostrarGraficos();
   }
+  mostrarGraficos();  // Llamar siempre al cambiar tipo para refrescar
 }
 
 // Función para cargar y mostrar tabla desde archivo JSON
@@ -97,14 +97,23 @@ function mostrarGraficos() {
 
   if (!producto || !tipo) return;
 
-  if (tipo === "Tabla") {
-    // Se asume que el archivo JSON para tabla está en carpeta data/ con el nombre igual a producto + ".json"
-    const archivoJSON = producto + ".json";
-    cargarYMostrarTabla(archivoJSON);
+if (tipo === "Tabla") {
+  const archivosPorProducto = {
+    "Producto_Bobinas": "03_BOBINAS_Mejores_Simulaciones_Todos_Los_Clientes_Combinados.json",
+    "Producto_Rollos": "04_Rollos_Apilamiento_Resultado_Completo.json",
+    "Producto_Cemento": "06_Resultado_Cemento_Asfaltico.json",
+    "Producto_Tubos": "07_TUBOS_Resultado_Apilamiento_Todos.json"
+  };
+
+  const archivoJSON = archivosPorProducto[producto];
+  if (!archivoJSON) {
+    contenedorTabla.innerHTML = "<p>No se encontró el archivo para este producto.</p>";
     return;
   }
 
-  let listaImagenes = [];
+  cargarYMostrarTabla(archivoJSON);
+  return; // Importante para evitar que siga a la parte de imágenes
+}
 
   if (tipo === "Prediccion") {
     if (!subtipo) return;
@@ -132,6 +141,7 @@ function mostrarGraficos() {
     contenedor.appendChild(img);
   });
 }
+
 
 
 
