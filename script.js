@@ -63,17 +63,22 @@ async function cargarYMostrarTabla(archivoJSON) {
       const th = document.createElement("th");
       th.textContent = clave;
       th.style.padding = "5px";
-      th.style.backgroundColor = "#eee";
+      th.style.backgroundColor = "#00695c";  // Verde petróleo
+      th.style.color = "white";
+      th.style.textAlign = "center";  // CENTRAR texto encabezado
       encabezado.appendChild(th);
     });
 
     // Crear filas
     datos.forEach(fila => {
       const tr = tabla.insertRow();
+      tr.style.backgroundColor = "white";
+      tr.style.color = "black";
       Object.values(fila).forEach(valor => {
         const td = tr.insertCell();
         td.textContent = valor;
         td.style.padding = "5px";
+        td.style.textAlign = "center";  // CENTRAR texto datos
       });
     });
 
@@ -97,24 +102,25 @@ function mostrarGraficos() {
 
   if (!producto || !tipo) return;
 
-if (tipo === "Tabla") {
-  const archivosPorProducto = {
-    "Producto_Bobinas": "03_BOBINAS_Mejores_Simulaciones_Todos_Los_Clientes_Combinados.json",
-    "Producto_Rollos": "04_Rollos_Apilamiento_Resultado_Completo.json",
-    "Producto_Cemento": "06_Resultado_Cemento_Asfaltico.json",
-    "Producto_Tubos": "07_TUBOS_Resultado_Apilamiento_Todos.json"
-  };
+  if (tipo === "Tabla") {
+    const archivosPorProducto = {
+      "Producto_Bobinas": "03_BOBINAS_Mejores_Simulaciones_Todos_Los_Clientes_Combinados.json",
+      "Producto_Rollos": "04_Rollos_Apilamiento_Resultado_Completo.json",
+      "Producto_Cemento": "06_Resultado_Cemento_Asfaltico.json",
+      "Producto_Tubos": "07_TUBOS_Resultado_Apilamiento_Todos.json"
+    };
 
-  const archivoJSON = archivosPorProducto[producto];
-  if (!archivoJSON) {
-    contenedorTabla.innerHTML = "<p>No se encontró el archivo para este producto.</p>";
-    return;
+    const archivoJSON = archivosPorProducto[producto];
+    if (!archivoJSON) {
+      contenedorTabla.innerHTML = "<p>No se encontró el archivo para este producto.</p>";
+      return;
+    }
+
+    cargarYMostrarTabla(archivoJSON);
+    return; // Importante para evitar que siga a la parte de imágenes
   }
 
-  cargarYMostrarTabla(archivoJSON);
-  return; // Importante para evitar que siga a la parte de imágenes
-}
-
+  let listaImagenes = [];
   if (tipo === "Prediccion") {
     if (!subtipo) return;
     listaImagenes = imagenesData[producto]?.Prediccion?.[subtipo] || [];
@@ -136,11 +142,30 @@ if (tipo === "Tabla") {
     }
     img.src = ruta + encodeURIComponent(nombreImg);
     img.alt = nombreImg;
-    img.style.width = "300px";
+
+    if (tipo === "Grafico_general" || tipo === "Mapa_calor") {
+      img.style.width = "500px";  // tamaño más grande
+      img.classList.add("zoomable"); // asignar clase para zoom
+    } else {
+      img.style.width = "300px";  // tamaño estándar
+    }
+
     img.style.margin = "10px";
     contenedor.appendChild(img);
   });
 }
+
+// Código para ocultar el loader después de 3 segundos
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const loader = document.getElementById('loader');
+    if (loader) {
+      loader.style.display = 'none';
+    }
+  }, 3000);
+});
+
+
 
 
 

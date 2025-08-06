@@ -8,8 +8,34 @@
 </head>
 <body>
 
+<div id="loader">
+  <div class="loader-text">TISUR</div>
+
+  <!-- Buque con humo -->
+  <div class="loader-ship">
+    <div class="ship-hull"></div>
+    <div class="ship-deck"></div>
+    <div class="ship-smoke-stack"></div>
+
+    <!-- 🔥 Múltiples burbujas de humo -->
+    <div class="smoke smoke1"></div>
+    <div class="smoke smoke2"></div>
+    <div class="smoke smoke3"></div>
+  </div>
+
+  <!-- Olas -->
+  <div class="loader-waves">
+    <svg viewBox="0 0 200 40" preserveAspectRatio="none">
+      <path class="wave-path" d="M0 30 Q20 15 40 30 T80 30 T120 30 T160 30 T200 30 V40 H0 Z" />
+      <path class="wave-path" d="M0 32 Q20 18 40 32 T80 32 T120 32 T160 32 T200 32 V40 H0 Z" />
+      <path class="wave-path" d="M0 28 Q20 12 40 28 T80 28 T120 28 T160 28 T200 28 V40 H0 Z" />
+    </svg>
+  </div>
+</div>
+
+
   <header>
-    <h1>Visualización de Predicción de Áreas Estimadas por Producto</h1>
+    <h1>Proyecto: Cubicacion y Prediccion de Carga Fraccionada</h1>
   </header>
 
   <div class="filtros">
@@ -48,8 +74,21 @@
   <div id="tabla-container"></div> <!-- Aquí irá la tabla -->
 
   <script src="script.js"></script>
+
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('loader');
+        if (loader) {
+          loader.style.display = 'none';
+        }
+      }, 5000); // 3 segundos
+    });
+  </script>
+
 </body>
 </html>
+
 
 
 
