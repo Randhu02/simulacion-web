@@ -34,15 +34,75 @@ function cambiarTipo() {
   }
 }
 
+// Función para cargar y mostrar tabla desde archivo JSON
+async function cargarYMostrarTabla(archivoJSON) {
+  try {
+    const respuesta = await fetch(`data/${archivoJSON}`);
+    if (!respuesta.ok) {
+      throw new Error(`No se pudo cargar el archivo: ${archivoJSON}`);
+    }
+    const datos = await respuesta.json();
+
+    const contenedor = document.getElementById("tabla-container");
+    contenedor.innerHTML = ""; // Limpiar contenido previo
+
+    if (!Array.isArray(datos) || datos.length === 0) {
+      contenedor.innerHTML = "<p>No hay datos para mostrar.</p>";
+      return;
+    }
+
+    const tabla = document.createElement("table");
+    tabla.border = "1";
+    tabla.style.borderCollapse = "collapse";
+    tabla.style.marginTop = "10px";
+    tabla.style.width = "100%";
+
+    // Crear encabezado
+    const encabezado = tabla.insertRow();
+    Object.keys(datos[0]).forEach(clave => {
+      const th = document.createElement("th");
+      th.textContent = clave;
+      th.style.padding = "5px";
+      th.style.backgroundColor = "#eee";
+      encabezado.appendChild(th);
+    });
+
+    // Crear filas
+    datos.forEach(fila => {
+      const tr = tabla.insertRow();
+      Object.values(fila).forEach(valor => {
+        const td = tr.insertCell();
+        td.textContent = valor;
+        td.style.padding = "5px";
+      });
+    });
+
+    contenedor.appendChild(tabla);
+  } catch (error) {
+    console.error("Error al cargar el archivo JSON:", error);
+    const contenedor = document.getElementById("tabla-container");
+    contenedor.innerHTML = `<p>Error cargando datos: ${error.message}</p>`;
+  }
+}
+
 function mostrarGraficos() {
   const producto = document.getElementById("producto").value;
   const tipo = document.getElementById("tipo").value;
   const subtipo = document.getElementById("subtipo").value;
 
   const contenedor = document.getElementById("contenedor-imagenes");
+  const contenedorTabla = document.getElementById("tabla-container");
   contenedor.innerHTML = "";
+  contenedorTabla.innerHTML = "";
 
   if (!producto || !tipo) return;
+
+  if (tipo === "Tabla") {
+    // Se asume que el archivo JSON para tabla está en carpeta data/ con el nombre igual a producto + ".json"
+    const archivoJSON = producto + ".json";
+    cargarYMostrarTabla(archivoJSON);
+    return;
+  }
 
   let listaImagenes = [];
 
@@ -72,6 +132,7 @@ function mostrarGraficos() {
     contenedor.appendChild(img);
   });
 }
+
 
 
 
