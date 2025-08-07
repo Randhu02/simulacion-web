@@ -394,3 +394,43 @@ button:hover,
     opacity: 0;
   }
 }
+
+
+/* Ajustes responsivos para celulares */
+@media (max-width: 768px) {
+  .loader-ship {
+    top: 35vh; /* Ajusta el valor según lo que necesites, 70vh = 70% de la altura de la ventana */
+    transform: scale(1.2); /* Reduce el tamaño si es muy grande para pantallas pequeñas */
+  }
+
+  .loader-text {
+    font-size: 4rem; /* Texto más pequeño para pantallas pequeñas */
+    letter-spacing: 4px;
+  }
+
+  .ship-hull {
+    width: 120px;
+    height: 30px;
+  }
+
+  .ship-deck {
+    width: 90px;
+    height: 15px;
+    left: 15px;
+  }
+
+  .ship-smoke-stack {
+    left: 60px;
+    height: 20px;
+  }
+
+  .smoke {
+    width: 10px;
+    height: 10px;
+  }
+
+  .loader-waves {
+    height: 60px;
+  }
+}
+
