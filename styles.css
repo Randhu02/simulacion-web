@@ -86,7 +86,7 @@ select:focus {
   padding: 0 15px;
 }
 
-/* Imagen */
+/* Imagenes normales (Desglose, Predicción) */
 #contenedor-imagenes img {
   width: 100%;
   max-width: 320px;
@@ -97,9 +97,37 @@ select:focus {
   cursor: pointer;
 }
 
+/* Hover zoom */
 #contenedor-imagenes img:hover {
   transform: scale(1.08);
   box-shadow: 0 10px 25px rgba(0, 77, 64, 0.9);
+}
+
+/* Gráficos grandes: Grafico general y Mapa de calor */
+#contenedor-imagenes img.zoomable {
+  max-width: 900px;
+  width: 100%;
+  height: auto;
+}
+
+/* Modal pantalla completa */
+#imagen-modal {
+  display: none; 
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.9);
+  justify-content: center;
+  align-items: center;
+}
+
+#imagen-modal img {
+  max-width: 95%;
+  max-height: 95%;
+  border-radius: 12px;
 }
 
 /* Mensaje de error */
@@ -135,7 +163,7 @@ button:hover,
 /* 🔄 RESPONSIVE PARA CELULAR */
 @media (max-width: 600px) {
   body {
-    padding-top: 120px;  /* espacio mayor para header */
+    padding-top: 120px;
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 30px;
@@ -180,8 +208,7 @@ button:hover,
   }
 }
 
-
-
+/* TABLA */
 .mi-tabla {
   width: 100%;
   border-collapse: collapse;
@@ -209,7 +236,6 @@ button:hover,
   background-color: #f9f9f9;
 }
 
-
 /* EFECTO ZOOM */
 
 .zoomable {
@@ -224,10 +250,6 @@ button:hover,
   position: relative;
 }
 
-
-
-
-
 /* Fondo loader */
 #loader {
   position: fixed;
@@ -241,196 +263,14 @@ button:hover,
   gap: 20px;
 }
 
-/* Texto TISUR */
-.loader-text {
-  color: white;
-  font-size: 10rem; /* tamaño ajustable */
-  font-weight: 900;
-  font-family: 'Arial Black', Arial, sans-serif;
-  user-select: none;
-  letter-spacing: 8px;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
-}
-
-/* Contenedor del buque */
-.loader-ship {
-  position: relative;
-  top: 200px; /* Ajusta si quieres moverlo arriba/abajo */
-  transform: scale(1.8); /* Aumenta al 150% */
-  transform-origin: center; /* Mantiene el centro como punto de escala */
-  animation: moverBarco 5s linear forwards;
-}
-
-/* Casco del buque */
-.ship-hull {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  width: 160px;
-  height: 40px;
-  background: linear-gradient(135deg, #263238 0%, #455a64 100%);
-  border-radius: 40px 40px 10px 10px;
-  box-shadow: inset 0 -8px 15px rgba(0,0,0,0.6);
-}
-
-/* Cubierta */
-.ship-deck {
-  position: absolute;
-  bottom: 40px;
-  left: 30px;
-  width: 120px;
-  height: 20px;
-  background: #607d8b;
-  border-radius: 10px 10px 0 0;
-  box-shadow: inset 0 3px 8px rgba(255,255,255,0.3);
-}
-
-/* Chimenea */
-.ship-smoke-stack {
-  position: absolute;
-  bottom: 60px;
-  left: 80px;
-  width: 15px;
-  height: 25px;
-  background: #37474f;
-  border-radius: 3px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-}
-
-.smoke {
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  width: 15px;
-  height: 15px;
-  background: white;
-  border-radius: 50%;
-  opacity: 0.8;
-  transform: translateX(-50%);
-  z-index: 1;
-}
-
-/* Animaciones diferenciadas para cada burbuja */
-.smoke1 {
-  animation: humoAnimado 2s infinite;
-}
-.smoke2 {
-  animation: humoAnimado 2s infinite 0.5s; /* empieza después */
-}
-.smoke3 {
-  animation: humoAnimado 2s infinite 1s;
-}
 
 
-/* Olas animadas */
-.loader-waves {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100vw; /* ancho total de la ventana */
-  height: 80px;  /* altura de las olas */
-  overflow: hidden;
-}
-
-.loader-waves svg {
-  width: 100%;  /* que el svg ocupe el ancho completo */
-  height: 100%;
-  display: block; /* elimina el espacio debajo del svg */
-}
-
-.wave-path {
-  fill: #c7dddb;
-  opacity: 0.7;
-  animation: waveMove 3s ease-in-out infinite;
-}
-
-.wave-path:nth-child(1) {
-  animation-delay: 0s;
-  opacity: 0.6;
-}
-
-.wave-path:nth-child(2) {
-  animation-delay: 1s;
-  opacity: 0.7;
-}
-
-.wave-path:nth-child(3) {
-  animation-delay: 2s;
-  opacity: 0.6;
-}
-
-/* Animaciones */
-
-@keyframes moverBarco {
-  from {
-    left: -1500px; /* empieza fuera de pantalla a la izquierda */
-  }
-  to {
-    left: 100vw;  /* termina fuera de pantalla a la derecha */
-  }
-}
-
-@keyframes waveMove {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
 
 
-@keyframes humoAnimado {
-  0% {
-    transform: translateX(-50%) translateY(0) scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: translateX(-60%) translateY(-20px) scale(1.3);
-    opacity: 0.5;
-  }
-  100% {
-    transform: translateX(-70%) translateY(-40px) scale(1.6);
-    opacity: 0;
-  }
-}
 
 
-/* Ajustes responsivos para celulares */
-@media (max-width: 768px) {
-  .loader-ship {
-    top: 35vh; /* Ajusta el valor según lo que necesites, 70vh = 70% de la altura de la ventana */
-    transform: scale(1.2); /* Reduce el tamaño si es muy grande para pantallas pequeñas */
-  }
 
-  .loader-text {
-    font-size: 4rem; /* Texto más pequeño para pantallas pequeñas */
-    letter-spacing: 4px;
-  }
 
-  .ship-hull {
-    width: 120px;
-    height: 30px;
-  }
 
-  .ship-deck {
-    width: 90px;
-    height: 15px;
-    left: 15px;
-  }
 
-  .ship-smoke-stack {
-    left: 60px;
-    height: 20px;
-  }
-
-  .smoke {
-    width: 10px;
-    height: 10px;
-  }
-
-  .loader-waves {
-    height: 60px;
-  }
-}
 

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulación de Cargas</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!--
+<div id="loader">
+  <div class="loader-text">TISUR</div>
+  <div class="loader-ship">
+    <div class="ship-hull"></div>
+    <div class="ship-deck"></div>
+    <div class="ship-smoke-stack"></div>
+    <div class="smoke smoke1"></div>
+    <div class="smoke smoke2"></div>
+    <div class="smoke smoke3"></div>
+  </div>
+  <div class="loader-waves">
+    <svg viewBox="0 0 200 40" preserveAspectRatio="none">
+      <path class="wave-path" d="M0 30 Q20 15 40 30 T80 30 T120 30 T160 30 T200 30 V40 H0 Z" />
+      <path class="wave-path" d="M0 32 Q20 18 40 32 T80 32 T120 32 T160 32 T200 32 V40 H0 Z" />
+      <path class="wave-path" d="M0 28 Q20 12 40 28 T80 28 T120 28 T160 28 T200 28 V40 H0 Z" />
+    </svg>
+  </div>
+</div>
+-->
+
+
+  <header>
+    <h1>Proyecto: Cubicacion y Prediccion de Carga Fraccionada</h1>
+  </header>
+
+  <div class="filtros">
+    <label for="producto">Producto:</label>
+    <select id="producto" onchange="cambiarProducto()">
+      <option value="">-- Selecciona --</option>
+      <option value="Producto_Bobinas">Bobinas</option>
+      <option value="Producto_Tubos">Tubos</option>
+      <option value="Producto_Cemento">Cemento</option>
+      <option value="Producto_Rollos">Rollos</option>
+    </select>
+
+    <label for="tipo">Tipo de gráfico:</label>
+    <select id="tipo" onchange="cambiarTipo()">
+      <option value="">-- Selecciona --</option>
+      <option value="Desglose">Desglose</option>
+      <option value="Grafico_general">Gráfico general</option>
+      <option value="Mapa_calor">Mapa de calor</option>
+      <option value="Prediccion">Predicción</option>
+      <option value="Tabla">Tabla (datos)</option> <!-- Nueva opción -->
+    </select>
+
+    <div id="subtipo-container" style="display: none;">
+      <label for="subtipo">Tipo de predicción:</label>
+      <select id="subtipo" onchange="mostrarGraficos()">
+        <option value="">-- Selecciona --</option>
+        <option value="Prediccion_bobinas">Bobinas</option>
+        <option value="Prediccion_cemento">Cemento</option>
+        <option value="Prediccion_rollos">Rollos</option>
+        <option value="Prediccion_tubos">Tubos</option>
+      </select>
+    </div>
+  </div>
+
+  <div id="contenedor-imagenes"></div>
+  <div id="tabla-container"></div> <!-- Aquí irá la tabla -->
+
+  <script src="script.js"></script>
+
+  <!--
+  <script>
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const loader = document.getElementById('loader');
+      if (loader) {
+        loader.style.display = 'none';
+      }
+    }, 5000);
+  });
+  </script>
+  -->
+
+</body>
+</html>
+

@@ -6,7 +6,6 @@ window.addEventListener('DOMContentLoaded', () => {
     .then(response => response.json())
     .then(data => {
       imagenesData = data;
-      // Opcional: cargar gráficos si ya hay selección previa
       mostrarGraficos();
     })
     .catch(error => {
@@ -14,6 +13,41 @@ window.addEventListener('DOMContentLoaded', () => {
       const contenedor = document.getElementById("contenedor-imagenes");
       contenedor.innerHTML = "<p>Error cargando datos de imágenes.</p>";
     });
+
+  // Crear modal dinámicamente para pantalla completa
+  const modal = document.createElement('div');
+  modal.id = 'imagen-modal';
+  modal.style.display = 'none';
+  modal.style.position = 'fixed';
+  modal.style.zIndex = '2000';
+  modal.style.left = '0';
+  modal.style.top = '0';
+  modal.style.width = '100%';
+  modal.style.height = '100%';
+  modal.style.backgroundColor = 'rgba(0,0,0,0.9)';
+  modal.style.justifyContent = 'center';
+  modal.style.alignItems = 'center';
+  modal.style.cursor = 'pointer';
+  modal.style.display = 'none';
+  modal.innerHTML = '<img src="" alt="Imagen ampliada" style="max-width:95%; max-height:95%; border-radius:12px;">';
+  document.body.appendChild(modal);
+
+  const modalImg = modal.querySelector('img');
+
+  // Abrir imagen al clic
+  document.getElementById('contenedor-imagenes').addEventListener('click', e => {
+    if(e.target.tagName === 'IMG') {
+      modal.style.display = 'flex';
+      modalImg.src = e.target.src;
+    }
+  });
+
+  // Cerrar modal al hacer clic fuera de la imagen
+  modal.addEventListener('click', e => {
+    if(e.target !== modalImg) {
+      modal.style.display = 'none';
+    }
+  });
 });
 
 function cambiarProducto() {
@@ -31,7 +65,7 @@ function cambiarTipo() {
   } else {
     subtipoContainer.style.display = "none";
   }
-  mostrarGraficos();  // Llamar siempre al cambiar tipo para refrescar
+  mostrarGraficos();
 }
 
 // Función para cargar y mostrar tabla desde archivo JSON
@@ -44,7 +78,7 @@ async function cargarYMostrarTabla(archivoJSON) {
     const datos = await respuesta.json();
 
     const contenedor = document.getElementById("tabla-container");
-    contenedor.innerHTML = ""; // Limpiar contenido previo
+    contenedor.innerHTML = ""; 
 
     if (!Array.isArray(datos) || datos.length === 0) {
       contenedor.innerHTML = "<p>No hay datos para mostrar.</p>";
@@ -57,19 +91,17 @@ async function cargarYMostrarTabla(archivoJSON) {
     tabla.style.marginTop = "10px";
     tabla.style.width = "100%";
 
-    // Crear encabezado
     const encabezado = tabla.insertRow();
     Object.keys(datos[0]).forEach(clave => {
       const th = document.createElement("th");
       th.textContent = clave;
       th.style.padding = "5px";
-      th.style.backgroundColor = "#00695c";  // Verde petróleo
+      th.style.backgroundColor = "#00695c";
       th.style.color = "white";
-      th.style.textAlign = "center";  // CENTRAR texto encabezado
+      th.style.textAlign = "center";
       encabezado.appendChild(th);
     });
 
-    // Crear filas
     datos.forEach(fila => {
       const tr = tabla.insertRow();
       tr.style.backgroundColor = "white";
@@ -78,7 +110,7 @@ async function cargarYMostrarTabla(archivoJSON) {
         const td = tr.insertCell();
         td.textContent = valor;
         td.style.padding = "5px";
-        td.style.textAlign = "center";  // CENTRAR texto datos
+        td.style.textAlign = "center";
       });
     });
 
@@ -117,7 +149,7 @@ function mostrarGraficos() {
     }
 
     cargarYMostrarTabla(archivoJSON);
-    return; // Importante para evitar que siga a la parte de imágenes
+    return;
   }
 
   let listaImagenes = [];
@@ -134,7 +166,7 @@ function mostrarGraficos() {
   }
 
   listaImagenes.forEach(nombreImg => {
-    if (!nombreImg) return; // Ignorar cadenas vacías
+    if (!nombreImg) return;
     const img = document.createElement("img");
     let ruta = `imagenes/${producto}/${tipo}/`;
     if (tipo === "Prediccion") {
@@ -142,28 +174,24 @@ function mostrarGraficos() {
     }
     img.src = ruta + encodeURIComponent(nombreImg);
     img.alt = nombreImg;
+    img.style.margin = "10px";
 
     if (tipo === "Grafico_general" || tipo === "Mapa_calor") {
-      img.style.width = "500px";  // tamaño más grande
-      img.classList.add("zoomable"); // asignar clase para zoom
-    } else {
-      img.style.width = "300px";  // tamaño estándar
+      img.classList.add("zoomable"); // tamaño mayor via CSS
     }
 
-    img.style.margin = "10px";
     contenedor.appendChild(img);
   });
 }
 
-// Código para ocultar el loader después de 3 segundos
+// Ocultar loader después de 3 segundos
 window.addEventListener('load', () => {
   setTimeout(() => {
     const loader = document.getElementById('loader');
-    if (loader) {
-      loader.style.display = 'none';
-    }
-  }, 3000);
+    if (loader) loader.style.display = 'none';
+  }, 1000);
 });
+
 
 
 
