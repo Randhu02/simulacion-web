@@ -2,36 +2,230 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Proyecto Carga a Granel</title>
-    <link rel="stylesheet" href="login.css">
+    <title>Ceres Peru SAC - Stock Envases</title>
+    <link rel="stylesheet" href="estilos.css">
+    
+    <!-- Firebase v9 compact -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    
+    <!-- Librería para exportar a Excel -->
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    
+    <!-- Librería para drag & drop -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 </head>
 <body>
 
-<div class="login-container">
-    <h2>Login</h2>
-    <input type="text" id="username" placeholder="Usuario">
-    <input type="password" id="password" placeholder="Contraseña">
-
-    <div class="options">
-        <label>
-            <input type="checkbox" id="showPassword"> Mostrar contraseña
-        </label>
+<!-- PANTALLA DE INICIO - ELIGE MODO -->
+<div id="inicioContainer" style="display: flex;">
+    <div class="modo-container">
+        <div class="modo-box">
+            <h2>Ceres Peru SAC - Stock Envases</h2>
+            
+            <div class="modo-opcion">
+                <h3>👁️ Modo Vista</h3>
+                <p>Solo para consultar el inventario. No se requiere login.</p>
+                <button id="btnModoVista" class="btn-modo-vista">Entrar como Visitante</button>
+            </div>
+            
+            <div class="separador">
+                <span>O</span>
+            </div>
+            
+            <div class="modo-opcion">
+                <h3>🔧 Modo Administrador</h3>
+                <p>Para agregar o eliminar registros. Requiere usuario y contraseña.</p>
+                <button id="btnModoAdmin" class="btn-modo-admin">Iniciar como Administrador</button>
+            </div>
+        </div>
     </div>
-
-    <div class="remember">
-        <input type="checkbox" id="rememberMe">
-        <label for="rememberMe">Remember me</label>
-    </div>
-
-    <button onclick="login()">Ingresar</button>
-    <p id="error-message" class="error"></p>
 </div>
 
-<script src="login.js"></script>
+<!-- FORMULARIO DE LOGIN (solo para modo admin) -->
+<div id="loginContainer" class="login-container" style="display: none;">
+    <div class="login-box">
+        <h2>Acceso Administrador</h2>
+        <p>Ingresa tus credenciales para modificar el inventario.</p>
+        
+        <form id="loginForm">
+            <input type="email" id="loginEmail" placeholder="Correo electrónico" required>
+            <input type="password" id="loginPassword" placeholder="Contraseña" required>
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        
+        <div id="loginError" class="error-message" style="display: none;"></div>
+        
+        <div class="login-options">
+            <button id="btnVolverInicio" class="btn-volver">← Volver a inicio</button>
+        </div>
+    </div>
+</div>
+
+<!-- APLICACIÓN PRINCIPAL -->
+<div id="mainContainer" class="container" style="display: none;">
+
+    <!-- Barra superior con info del modo -->
+    <div class="user-bar">
+        <div>
+            <span id="userEmail">Modo: Visitante (Solo lectura)</span>
+            <span id="modoInfo"></span>
+        </div>
+        <div>
+            <button id="btnCambiarModo" class="btn-cambiar">Cambiar Modo</button>
+            <button id="btnLogout" style="display: none;">Cerrar Sesión</button>
+        </div>
+    </div>
+
+    <h1>Ceres Peru SAC - Stock Envases</h1>
+
+    <!-- FORMULARIO DE INVENTARIO (solo visible en modo admin) -->
+    <div id="formContainer" style="display: none;">
+        <h2>Agregar Nuevo Registro</h2>
+        <form id="formInventario">
+            <label>Descripción:</label>
+            <select id="descripcion" required>
+                <option value="">Seleccione</option>
+                <option>UREA FERTI * 50 KG.</option>
+                <option>FOSFATO DIAMONICO FERTI * 50 KG.</option>
+                <option>SULFATO DE AMONIO FERTI * 50 KG.</option>
+                <option>ADITIVO MARRON - BOLSAS * 20 KG.</option>
+                <option>NITRATO DE AMONIO * 50 KG.</option>
+                <option>NITRATO DE AMONIO * 50 KG. - POLIPROPILENO</option>
+                <option>CLORURO DE POTASIO *50 KG.</option>
+                <option>NITRO S PREMIUM AMARILLO * 50 KG</option>
+                <option>SUPER BLUE * 50 KG</option>
+                <option>NPK 20-20-20 * 50 KG</option>
+                <option>PAPA SIERRA * 50 KG</option>
+                <option>ADITIVO AMARILLO * 20KG</option>
+            </select>
+
+            <label>Fecha:</label>
+            <input type="date" id="fecha" required>
+
+            <label>Operación:</label>
+            <input type="text" id="operacion" placeholder="Ej: Ingreso de almacén" required>
+
+            <label>Ingreso:</label>
+            <input type="number" id="ingreso" value="0" min="0">
+
+            <label>Salida:</label>
+            <input type="number" id="salida" value="0" min="0">
+
+            <label>Observaciones:</label>
+            <textarea id="observaciones" placeholder="Observaciones adicionales (opcional)" rows="3"></textarea>
+
+            <button type="submit">Agregar Registro</button>
+        </form>
+    </div>
+
+    <!-- MOSTRAR TABLA (visible para todos) -->
+    <div class="bloque">
+        <h3>Consultar Inventario</h3>
+        
+        <div id="infoModo">
+            <!-- Mensaje dinámico según el modo -->
+        </div>
+
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <select id="productoFiltro" style="flex: 1; min-width: 200px;">
+                <option value="">Seleccione un producto</option>
+                <option>UREA FERTI * 50 KG.</option>
+                <option>FOSFATO DIAMONICO FERTI * 50 KG.</option>
+                <option>SULFATO DE AMONIO FERTI * 50 KG.</option>
+                <option>ADITIVO MARRON - BOLSAS * 20 KG.</option>
+                <option>NITRATO DE AMONIO * 50 KG.</option>
+                <option>NITRATO DE AMONIO * 50 KG. - POLIPROPILENO</option>
+                <option>CLORURO DE POTASIO *50 KG.</option>
+                <option>NITRO S PREMIUM AMARILLO * 50 KG</option>
+                <option>SUPER BLUE * 50 KG</option>
+                <option>NPK 20-20-20 * 50 KG</option>
+                <option>PAPA SIERRA * 50 KG</option>
+                <option>ADITIVO AMARILLO * 20KG</option>
+            </select>
+
+            <button type="button" id="btnMostrar">📋 Mostrar Tabla</button>
+            <button type="button" id="btnRecalcular" style="display: none; background-color: #dc3545; color: white;">
+                🔄 Recalcular Stock
+            </button>
+        </div>
+    </div>
+
+    <div id="contenedorTablas"></div>
+
+    <!-- TABLA RESUMEN -->
+    <div class="bloque">
+        <div class="resumen-header">
+            <h3>STOCK DE ENVASES VACIOS CERES PERÚ</h3>
+            <button id="btnExportarExcel" class="btn-excel">📊 Exportar a Excel</button>
+        </div>
+        
+        <p>Resumen de stock actualizado de todos los productos</p>
+        
+        <div id="tablaResumenContainer">
+            <p>Cargando resumen de stock...</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- MODAL PARA EDITAR REGISTRO -->
+<div id="modalEditar" class="modal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>✏️ Editar Registro</h3>
+            <button class="modal-close" id="btnCerrarModal">&times;</button>
+        </div>
+        
+        <form id="formEditar">
+            <input type="hidden" id="editItemProducto">
+            <input type="hidden" id="editIndex">
+            
+            <label>Descripción:</label>
+            <select id="editDescripcion" disabled>
+                <option value="">Seleccione</option>
+                <option>UREA FERTI * 50 KG.</option>
+                <option>FOSFATO DIAMONICO FERTI * 50 KG.</option>
+                <option>SULFATO DE AMONIO FERTI * 50 KG.</option>
+                <option>ADITIVO MARRON - BOLSAS * 20 KG.</option>
+                <option>NITRATO DE AMONIO * 50 KG.</option>
+                <option>NITRATO DE AMONIO * 50 KG. - POLIPROPILENO</option>
+                <option>CLORURO DE POTASIO *50 KG.</option>
+                <option>NITRO S PREMIUM AMARILLO * 50 KG</option>
+                <option>SUPER BLUE * 50 KG</option>
+                <option>NPK 20-20-20 * 50 KG</option>
+                <option>PAPA SIERRA * 50 KG</option>
+                <option>ADITIVO AMARILLO * 20KG</option>
+            </select>
+
+            <label>Fecha:</label>
+            <input type="date" id="editFecha" required>
+
+            <label>Operación:</label>
+            <input type="text" id="editOperacion" placeholder="Ej: Ingreso de almacén" required>
+
+            <label>Ingreso:</label>
+            <input type="number" id="editIngreso" value="0" min="0">
+
+            <label>Salida:</label>
+            <input type="number" id="editSalida" value="0" min="0">
+
+            <label>Observaciones:</label>
+            <textarea id="editObservaciones" placeholder="Observaciones adicionales (opcional)" rows="3"></textarea>
+
+            <div class="modal-buttons">
+                <button type="button" id="btnCancelarEditar" class="btn-cancelar">Cancelar</button>
+                <button type="submit" class="btn-guardar">Guardar Cambios</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="codigo-firebase.js"></script>
+
 </body>
 </html>
-
 
 
 
